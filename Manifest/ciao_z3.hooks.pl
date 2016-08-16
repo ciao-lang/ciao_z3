@@ -29,17 +29,11 @@ ciao_z3_desc := [
 % ---------------------------------------------------------------------------
 % Run tests
 
-:- use_module(library(system), [working_directory/2]).
-:- use_module(ciaobld(ciaoc_aux), [invoke_ciaosh_batch/1]).
+:- use_module(ciaobld(ciaoc_aux), [runtests_dir/3]).
 
-% TODO: use unittests
-'$builder_hook'(runtests) :- !,
-	working_directory(ThisDir, ~fsR(bundle_src(ciao_z3))),
-	invoke_ciaosh_batch([
-	  use_module(test, [test/1]),
-	  ( test(_), fail ; true )
-	]),
-	working_directory(_, ThisDir).
+'$builder_hook'(test) :- !,
+	% TODO: check output programmatically
+	runtests_dir(ciao_z3, 'tests', [rtc_entry, dump_output]).
 
 % ---------------------------------------------------------------------------
 % (call external scripts and makefiles)

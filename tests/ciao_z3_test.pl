@@ -1,13 +1,9 @@
-:- module(ciao_z3_test, _, []).
+:- module(ciao_z3_test, [], [assertions]).
 
 :- use_module(library(write)).
 :- use_module(ciao_z3(ciao_z3)).
 :- use_module(library(format)).
 :- use_module(library(strings)).
-
-main :-
-	test1,
-	test2.
 
 % Expected:
 %   true
@@ -18,6 +14,8 @@ main :-
 %   TF1 = true
 %   TF2 = false
 
+:- test test1/0.
+:- export(test1/0).
 test1 :-
 	z3_init,
 	z3_mk_context(Ctx),
@@ -76,6 +74,8 @@ expr_from_z3(Ctx, V, X) :-
 	z3_term_to_string(Ctx, V, Str),
 	number_codes(Str, X).
 
+:- test test2/0.
+:- export(test2/0).
 % Expected:
 %   T1 = (= (+ x y) (to_real 0))
 test2 :-
