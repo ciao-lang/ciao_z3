@@ -2,14 +2,12 @@
 
 :- doc(title,  "Bundle Hooks for Ciao-Z3").
 
-'$builder_hook'(prebuild_nodocs) :-
+'$builder_hook'(prebuild_bin) :-
 	aux_call(['install_bin_dist']), % Use binary distribution
 %	aux_call(['install_src_dist']), % Use source distribution
 	aux_call(['gen_conf']).
 
-'$builder_hook'(bundle_def([
-  lib('src')
-])).
+'$builder_hook'(lib('src')).
 
 % ---------------------------------------------------------------------------
 % Run tests
