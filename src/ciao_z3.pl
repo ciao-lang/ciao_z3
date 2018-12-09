@@ -1,4 +1,4 @@
-:- module(ciao_z3, [], [assertions, basicmodes, regtypes, foreign_interface]).
+:- module(ciao_z3, [], [assertions, basicmodes, regtypes, datafacts, foreign_interface]).
 
 :- use_module(library(lists), [append/3]).
 

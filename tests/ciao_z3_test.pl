@@ -1,9 +1,9 @@
 :- module(ciao_z3_test, [], [assertions]).
 
+:- use_module(library(streams)).
 :- use_module(library(write)).
-:- use_module(ciao_z3(ciao_z3)).
 :- use_module(library(format)).
-:- use_module(library(strings)).
+:- use_module(ciao_z3(ciao_z3)).
 
 % Expected:
 %   true
