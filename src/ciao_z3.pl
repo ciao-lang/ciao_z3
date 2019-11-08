@@ -152,7 +152,7 @@ z3_type(array(Domain, Range), Ctx, Tau) :- z3_mk_array_sort(Ctx, Domain, Range, 
 z3_expr(Ctx, Expr, R) :-
 	exp(Expr, Ctx, R).
 
-exp([], Ctx, R) --> !, exp(true, Ctx, R).
+exp([], Ctx, R) :- !, exp(true, Ctx, R).
 exp([X], Ctx, R) :- !, exp(X, Ctx, R).
 exp([X|Ys], Ctx, R) :- !, exp((X,Ys), Ctx, R).
 exp((X,Y), Ctx, R) :- !, exp(X, Ctx, Xr), exp(Y, Ctx, Yr), z3_mk_and2(Ctx, Xr, Yr, R).
