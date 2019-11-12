@@ -125,12 +125,12 @@ static inline bool_t is_quantifier(Z3_context c, Z3_ast a) {
 
 static inline bool_t is_rational_value(Z3_context c, Z3_ast a) {
   return (Z3_get_sort_kind(c, Z3_get_sort(c, a)) == Z3_REAL_SORT &&
-	  Z3_is_numeral_ast(c, a));
+          Z3_is_numeral_ast(c, a));
 }
 
 static inline bool_t is_int_value(Z3_context c, Z3_ast a) {
   return (Z3_get_sort_kind(c, Z3_get_sort(c, a)) == Z3_INT_SORT &&
-	  Z3_is_numeral_ast(c, a));
+          Z3_is_numeral_ast(c, a));
 }
 
 /* -------------------------------------------------------------------------------------- */
@@ -196,25 +196,25 @@ void translate_term(Z3_context ctx, FILE *out, Z3_ast p) {
     Z3_app b = Z3_to_app(ctx, p);
     const char *n = "";
     switch(Z3_get_decl_kind(ctx, Z3_get_app_decl(ctx, b))) {
-    case Z3_OP_AND:	n = ","; goto conn;
-    case Z3_OP_OR:	n = ";"; goto conn;
-    case Z3_OP_ADD:	n = "+"; goto infix;
-    case Z3_OP_SUB:	n = "-"; goto infix;
-    case Z3_OP_MUL:	n = "*"; goto infix;
-    case Z3_OP_EQ:	n = "="; goto infix;
-    case Z3_OP_LE:	n = "=<"; goto infix;
-    case Z3_OP_GE:	n = ">="; goto infix;
-    case Z3_OP_LT:	n = "<"; goto infix;
-    case Z3_OP_GT:	n = ">"; goto infix;
+    case Z3_OP_AND:     n = ","; goto conn;
+    case Z3_OP_OR:      n = ";"; goto conn;
+    case Z3_OP_ADD:     n = "+"; goto infix;
+    case Z3_OP_SUB:     n = "-"; goto infix;
+    case Z3_OP_MUL:     n = "*"; goto infix;
+    case Z3_OP_EQ:      n = "="; goto infix;
+    case Z3_OP_LE:      n = "=<"; goto infix;
+    case Z3_OP_GE:      n = ">="; goto infix;
+    case Z3_OP_LT:      n = "<"; goto infix;
+    case Z3_OP_GT:      n = ">"; goto infix;
     case Z3_OP_IMPLIES: n = "->"; goto infix;
-    case Z3_OP_NOT:	n = "\\+"; goto str;
-    case Z3_OP_FALSE:	n = "false"; goto cons;
-    case Z3_OP_TRUE:	n = "true"; goto cons;
+    case Z3_OP_NOT:     n = "\\+"; goto str;
+    case Z3_OP_FALSE:   n = "false"; goto cons;
+    case Z3_OP_TRUE:    n = "true"; goto cons;
     default:
       {
-	Z3_func_decl decl = Z3_get_app_decl(ctx, b);
-	Z3_symbol name = Z3_get_decl_name(ctx, decl);
-	n = Z3_get_symbol_string(ctx, name);
+        Z3_func_decl decl = Z3_get_app_decl(ctx, b);
+        Z3_symbol name = Z3_get_decl_name(ctx, decl);
+        n = Z3_get_symbol_string(ctx, name);
       }
       goto str;
     }
@@ -232,13 +232,13 @@ void translate_term(Z3_context ctx, FILE *out, Z3_ast p) {
       fprintf(out, "%s", n);
       int len = Z3_get_app_num_args(ctx, b);
       if (len > 0) {
-	fprintf(out, "(");
-	translate_term(ctx, out, Z3_get_app_arg(ctx, b, 0));
-	for (int i = 1; i < len; i++) {
-	  fprintf(out, ", ");
-	  translate_term(ctx, out, Z3_get_app_arg(ctx, b, i));
-	}
-	fprintf(out, ")");
+        fprintf(out, "(");
+        translate_term(ctx, out, Z3_get_app_arg(ctx, b, 0));
+        for (int i = 1; i < len; i++) {
+          fprintf(out, ", ");
+          translate_term(ctx, out, Z3_get_app_arg(ctx, b, i));
+        }
+        fprintf(out, ")");
       }
     goto end;
     }
